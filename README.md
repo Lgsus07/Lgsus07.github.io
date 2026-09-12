@@ -1,1 +1,522 @@
 # Lgsus07.github.io
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiendita Amazon</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121b2f;
+      --text:#e8eefc;
+      --muted:#a9b4d0;
+      --accent:#6ea8fe;
+      --accent2:#8b5cf6;
+      --border: rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,168,254,.25), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(139,92,246,.25), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.65);
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding: 16px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .logo{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo .dot{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(110,168,254,.25);
+    }
+    .search{
+      flex:1;
+      display:flex; gap:10px; align-items:center;
+      max-width:520px;
+    }
+    .search input{
+      width:100%;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.7);
+      color:var(--text);
+      outline:none;
+    }
+    .search input::placeholder{color: var(--muted)}
+    .btn{
+      padding:12px 14px; border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.7);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+    }
+
+    .hero{
+      padding: 28px 0 6px;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .hero-card{
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.55);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .hero-card h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3.2vw, 40px);
+      line-height:1.1;
+    }
+    .hero-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      max-width: 60ch;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .chip{
+      padding:8px 12px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.7);
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 13px;
+    }
+
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      align-items:flex-start;
+    }
+    .filter{
+      width: calc(50% - 5px);
+      min-width: 190px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.55);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .filter label{
+      display:block; font-size:12px; color:var(--muted); font-weight:800; margin-bottom:8px;
+    }
+    .filter select{
+      width:100%;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.7);
+      color:var(--text);
+      outline:none;
+      font-weight:700;
+    }
+
+    .section-title{
+      margin: 18px 0 10px;
+      display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    }
+    .section-title h2{margin:0; font-size:20px}
+    .section-title span{color:var(--muted); font-weight:800; font-size: 13px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      padding: 10px 0 40px;
+    }
+    @media (max-width: 1000px){ .grid{grid-template-columns: repeat(3, 1fr)} }
+    @media (max-width: 800px){ .grid{grid-template-columns: repeat(2, 1fr)} }
+    @media (max-width: 520px){ .grid{grid-template-columns: 1fr} }
+
+    .card{
+      border:1px solid var(--border);
+      background: rgba(18,27,47,.55);
+      border-radius: 18px;
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height: 320px;
+    }
+    .img{
+      width:100%;
+      height: 160px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .img img{
+      width:100%; height:100%; object-fit:cover;
+    }
+    .name{
+      font-weight: 900;
+      line-height: 1.2;
+      margin-top: 2px;
+      font-size: 15px;
+      min-height: 40px;
+    }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      color: var(--muted);
+      font-weight:800;
+      font-size: 13px;
+      margin-top:auto;
+    }
+    .price{
+      color: var(--text);
+      font-weight: 950;
+    }
+    .rating{
+      display:flex; align-items:center; gap:6px;
+      white-space:nowrap;
+    }
+    .stars{
+      color: #fbbf24;
+      letter-spacing: 1px;
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .actions{
+      display:flex; gap:10px; align-items:center;
+    }
+    .link{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      width:100%;
+      text-decoration:none;
+      border-radius: 14px;
+      padding: 12px 12px;
+      background: linear-gradient(135deg, rgba(110,168,254,.95), rgba(139,92,246,.95));
+      border: none;
+      color: #071022;
+      font-weight: 1000;
+    }
+    .tag{
+      position:absolute;
+      margin: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+      font-weight: 950;
+      font-size: 12px;
+    }
+    .imgWrap{position:relative; width:100%; height:160px;}
+
+    footer{
+      border-top:1px solid var(--border);
+      padding: 22px 0;
+      color: var(--muted);
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+      flex-wrap:wrap;
+    }
+    .small{font-size:13px; line-height:1.5}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="logo" aria-label="Logo Tiendita Amazon">
+        <div class="dot"></div>
+        <div>Tiendita Amazon 🛒</div>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="🔎 Buscar productos..." />
+        <button class="btn" id="clearBtn" title="Limpiar">Limpiar</button>
+      </div>
+
+      <button class="btn primary" id="contactBtn">📩 Contacto</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <h1>Encuentra productos increíbles en Amazon</h1>
+        <p>
+          Esta es una tienda simple tipo catálogo. Reemplaza las imágenes, nombres y
+          enlaces con tus productos y links de afiliado de Amazon.
+        </p>
+        <div class="chips">
+          <div class="chip">✅ Catálogo rápido</div>
+          <div class="chip">🔎 Búsqueda</div>
+          <div class="chip">⭐ Ordenar por rating</div>
+          <div class="chip">📦 Enlaces directos</div>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="filter">
+          <label for="categorySelect">Categoría</label>
+          <select id="categorySelect">
+            <option value="todas">Todas</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="sortSelect">Orden</label>
+          <select id="sortSelect">
+            <option value="relevancia">Relevancia</option>
+            <option value="rating_desc">⭐ Rating (alto)</option>
+            <option value="price_asc">💲 Precio (bajo)</option>
+            <option value="price_desc">💲 Precio (alto)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>Productos destacados</h2>
+    <span id="resultsCount">0 resultados</span>
+  </div>
+
+  <section class="grid" id="productGrid" aria-live="polite">
+    <!-- Cards inyectadas por JS -->
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="small">
+        <strong>ℹ️ Aviso:</strong> Los enlaces pueden ser de afiliado.
+        <br/>
+        Revisa las políticas de Amazon Associates antes de publicar.
+      </div>
+      <div class="small">
+        © <span id="year"></span> Tiendita Amazon — Hecho para catálogo.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ✅ Reemplaza esto con tus links de afiliado de Amazon
+  // Estructura:
+  // { id, name, category, price, rating, image, tag, amazonUrl }
+  const products = [
+    {
+      id: "p1",
+      name: "Audífonos Bluetooth con cancelación de ruido",
+      category: "Audio",
+      price: 39.99,
+      rating: 4.6,
+      image: "https://images.unsplash.com/photo-1518441902117-f0a7f1f1d5f5?auto=format&fit=crop&w=800&q=60",
+      tag: "Top 🔥",
+      amazonUrl: "https://www.amazon.com/" // <-- cambia por tu link afiliado
+    },
+    {
+      id: "p2",
+      name: "Smartwatch resistente al agua (Sport)",
+      category: "Wearables",
+      price: 59.90,
+      rating: 4.4,
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=60",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p3",
+      name: "Teclado mecánico gamer RGB",
+      category: "Computación",
+      price: 74.50,
+      rating: 4.7,
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60",
+      tag: "Recomendado",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p4",
+      name: "Cámara de seguridad WiFi 1080p",
+      category: "Hogar",
+      price: 28.99,
+      rating: 4.3,
+      image: "https://images.unsplash.com/photo-1583394838336-acd977736f58?auto=format&fit=crop&w=800&q=60",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p5",
+      name: "Libreta premium para productividad (A5)",
+      category: "Oficina",
+      price: 12.49,
+      rating: 4.5,
+      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=60",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p6",
+      name: "Lámpara LED para escritorio con USB",
+      category: "Hogar",
+      price: 19.99,
+      rating: 4.2,
+      image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=60",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p7",
+      name: "Power bank 20.000mAh (carga rápida)",
+      category: "Movilidad",
+      price: 34.90,
+      rating: 4.6,
+      image: "https://images.unsplash.com/photo-1585070364775-5b5f4d2d4cc7?auto=format&fit=crop&w=800&q=60",
+      tag: "Ahorra ⚡",
+      amazonUrl: "https://www.amazon.com/"
+    },
+    {
+      id: "p8",
+      name: "Mochila urbana impermeable (anti-rasgaduras)",
+      category: "Movilidad",
+      price: 22.99,
+      rating: 4.4,
+      image: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=800&q=60",
+      amazonUrl: "https://www.amazon.com/"
+    }
+  ];
+
+  const grid = document.getElementById("productGrid");
+  const searchInput = document.getElementById("searchInput");
+  const categorySelect = document.getElementById("categorySelect");
+  const sortSelect = document.getElementById("sortSelect");
+  const resultsCount = document.getElementById("resultsCount");
+  const clearBtn = document.getElementById("clearBtn");
+  const contactBtn = document.getElementById("contactBtn");
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Construir categorías únicas
+  const categories = Array.from(new Set(products.map(p => p.category))).sort();
+  for (const c of categories){
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    categorySelect.appendChild(opt);
+  }
+
+  function formatPrice(value){
+    return value.toLocaleString("es-ES", { style: "currency", currency: "USD" });
+  }
+
+  function stars(rating){
+    // rating 0-5 -> estrellas "★★★★☆"
+    const full = Math.floor(rating);
+    const half = (rating - full) >= 0.5 ? 1 : 0;
+    const totalFull = Math.min(5, full + half);
+    return "★★★★★".slice(0, totalFull) + "☆☆☆☆☆".slice(0, 5-totalFull);
+  }
+
+  function getFilteredProducts(){
+    const query = searchInput.value.trim().toLowerCase();
+    const cat = categorySelect.value;
+    let list = [...products];
+
+    if (cat !== "todas"){
+      list = list.filter(p => p.category === cat);
+    }
+
+    if (query){
+      list = list.filter(p => (p.name + " " + p.category).toLowerCase().includes(query));
+    }
+
+    // Orden
+    const sort = sortSelect.value;
+    if (sort === "rating_desc"){
+      list.sort((a,b) => b.rating - a.rating);
+    } else if (sort === "price_asc"){
+      list.sort((a,b) => a.price - b.price);
+    } else if (sort === "price_desc"){
+      list.sort((a,b) => b.price - a.price);
+    } // relevancia -> conserva orden del array
+
+    return list;
+  }
+
+  function render(){
+    const list = getFilteredProducts();
+    resultsCount.textContent = `${list.length} resultados`;
+
+    grid.innerHTML = "";
+    list.forEach(p => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="imgWrap">
+          ${p.tag ? `<div class="tag">${p.tag}</div>` : ""}
+          <div class="img">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="name">${p.name}</div>
+
+        <div class="meta">
+          <div class="rating">
+            <span class="stars" aria-hidden="true">${stars(p.rating)}</span>
+            <span>${p.rating.toFixed(1)}</span>
+          </div>
+          <div class="price">${formatPrice(p.price)}</div>
+        </div>
+
+        <div class="actions">
+          <a class="link" href="${p.amazonUrl}" target="_blank" rel="noopener noreferrer">
+            Ver en Amazon ➜
+          </a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // Eventos
+  searchInput.addEventListener("input", render);
+  categorySelect.addEventListener("change", render);
+  sortSelect.addEventListener("change", render);
+
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    categorySelect.value = "todas";
+    sortSelect.value = "relevancia";
+    render();
+  });
+
+  contactBtn.addEventListener("click", () => {
+    alert("📩 Contacto: aquí puedes poner tu WhatsApp, email o formulario.");
+  });
+
+  // Inicial
+  render();
+</script>
+
+</body>
+</html>
