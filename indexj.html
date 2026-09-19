@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de Mochilas</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --border: rgba(255, 255, 255, 0.1);
+      --whatsapp: #22c55e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text);
+      outline: none;
+    }
+
+    .hero {
+      padding: 24px 0 10px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 42px);
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 0 auto 16px;
+      max-width: 600px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .imgWrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .imgWrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .actions {
+      margin-top: auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-ws {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: var(--whatsapp);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="logo">🎒 Mi Tienda Mochilas</div>
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="🔍 Buscar mochila por nombre..." />
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Encuentra tu Mochila Ideal</h1>
+    <p>Diseños urbanos, para viajes, trabajo y estudio con los mejores materiales.</p>
+    
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCategory('todas', this)">Todas</button>
+      <button class="filter-btn" onclick="filterCategory('Urbana', this)">Urbanas</button>
+      <button class="filter-btn" onclick="filterCategory('Viaje', this)">Viajes</button>
+      <button class="filter-btn" onclick="filterCategory('Escolar', this)">Escolares / Laptop</button>
+    </div>
+  </section>
+
+  <section class="grid" id="productGrid">
+    <!-- Productos renderizados con JS -->
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Mi Tienda de Mochilas — Todos los derechos reservados.
+  </div>
+</footer>
+
+<script>
+  // Tu número de WhatsApp con código de país (ejemplo: 573001234567)
+  const phoneWhatsApp = "573000000000";
+
+  // Catálogo de productos (Imágenes de prueba)
+  const products = [
+    {
+      id: 1,
+      name: "Mochila Urbana Antirrobo",
+      category: "Urbana",
+      price: 35.00,
+      tag: "Más Vendida 🔥",
+      image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 2,
+      name: "Mochila Viajera Impermeable 40L",
+      category: "Viaje",
+      price: 55.00,
+      tag: "Resistente 🌧️",
+      image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 3,
+      name: "Mochila Ejecutiva Porta Laptop 15.6\"",
+      category: "Escolar",
+      price: 42.50,
+      tag: "Con Puerto USB ⚡",
+      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 4,
+      name: "Mochila Minimalista Compacta",
+      category: "Urbana",
+      price: 28.00,
+      image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
+    }
+  ];
+
+  let currentCategory = "todas";
+  const grid = document.getElementById("productGrid");
+  const searchInput = document.getElementById("searchInput");
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function render() {
+    const query = searchInput.value.toLowerCase();
+    grid.innerHTML = "";
+
+    const filtered = products.filter(p => {
+      const matchesCategory = currentCategory === "todas" || p.category === currentCategory;
+      const matchesSearch = p.name.toLowerCase().includes(query);
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">No se encontraron mochilas.</p>`;
+      return;
+    }
+
+    filtered.forEach(p => {
+      const message = encodeURIComponent(`Hola, estoy interesado en comprar la *${p.name}* (Precio: $${p.price.toFixed(2)}). ¿Tienen disponibilidad?`);
+      const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="imgWrap">
+          ${p.tag ? `<div class="tag">${p.tag}</div>` : ""}
+          <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        </div>
+        <div class="name">${p.name}</div>
+        <div class="price">$${p.price.toFixed(2)}</div>
+        <div class="actions">
+          <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp 📲</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function filterCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }
+
+  searchInput.addEventListener("input", render);
+  render();
+</script>
+
+</body>
+</html>
