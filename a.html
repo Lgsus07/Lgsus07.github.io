@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda de Mochilas</title>
+  <title>LAURA DURANGO HAND MADE</title>
 
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-hover: #0284c7;
-      --border: rgba(255, 255, 255, 0.1);
-      --whatsapp: #22c55e;
+      --bg: #f7f4ee;           /* Fondo beige cálido */
+      --card: #ffffff;         /* Fondo de tarjetas blanco */
+      --text: #2c2523;         /* Texto marrón oscuro elegante */
+      --muted: #786c66;        /* Texto secundario */
+      --accent: #b07d52;       /* Tono terracota/artesanal */
+      --accent-hover: #8c5e37;
+      --border: #e6dfd5;       /* Bordes suaves */
+      --whatsapp: #25d366;     /* Verde WhatsApp */
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       color: var(--text);
     }
@@ -37,7 +37,7 @@
       top: 0;
       z-index: 10;
       backdrop-filter: blur(12px);
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(247, 244, 238, 0.9);
       border-bottom: 1px solid var(--border);
     }
 
@@ -51,10 +51,11 @@
 
     .logo {
       font-weight: 800;
-      font-size: 20px;
+      font-size: 22px;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: var(--accent);
     }
 
     .search {
@@ -67,25 +68,27 @@
       padding: 10px 14px;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: rgba(30, 41, 59, 0.8);
+      background: #ffffff;
       color: var(--text);
       outline: none;
     }
 
     .hero {
-      padding: 24px 0 10px;
+      padding: 30px 0 10px;
       text-align: center;
     }
 
     .hero h1 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-size: clamp(28px, 4vw, 42px);
+      color: var(--text);
     }
 
     .hero p {
       color: var(--muted);
-      margin: 0 auto 16px;
-      max-width: 600px;
+      margin: 0 auto 20px;
+      max-width: 650px;
+      line-height: 1.5;
     }
 
     .filters {
@@ -97,7 +100,7 @@
     }
 
     .filter-btn {
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--card);
@@ -109,13 +112,44 @@
 
     .filter-btn.active, .filter-btn:hover {
       background: var(--accent);
-      color: #000;
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* 📢 Estilos de Publicidad */
+    .banner-ad {
+      background: #efe8dc;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+
+    .banner-ad span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .banner-ad h3 {
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+
+    .banner-ad p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      gap: 20px;
     }
 
     @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -126,19 +160,20 @@
       border: 1px solid var(--border);
       background: var(--card);
       border-radius: 16px;
-      padding: 12px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     }
 
     .imgWrap {
       position: relative;
       width: 100%;
-      height: 200px;
+      height: 220px;
       border-radius: 12px;
       overflow: hidden;
-      background: rgba(0,0,0,0.2);
+      background: #fdfbf7;
     }
 
     .imgWrap img {
@@ -151,26 +186,36 @@
       position: absolute;
       top: 8px;
       left: 8px;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
+      border: 1px solid var(--border);
     }
 
     .name {
       font-weight: 700;
-      font-size: 16px;
+      font-size: 17px;
+      margin-top: 4px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+      margin: 0;
     }
 
     .price {
       font-size: 18px;
-      font-weight: 900;
+      font-weight: 800;
       color: var(--accent);
+      margin-top: auto;
     }
 
     .actions {
-      margin-top: auto;
       display: flex;
       gap: 8px;
     }
@@ -192,7 +237,7 @@
     footer {
       border-top: 1px solid var(--border);
       text-align: center;
-      padding: 20px 0;
+      padding: 24px 0;
       margin-top: 40px;
       color: var(--muted);
       font-size: 14px;
@@ -204,9 +249,9 @@
 <header>
   <div class="wrap">
     <div class="topbar">
-      <div class="logo">🎒 Mi Tienda Mochilas</div>
+      <div class="logo">🧵 LAURA DURANGO HAND MADE</div>
       <div class="search">
-        <input id="searchInput" type="text" placeholder="🔍 Buscar mochila por nombre..." />
+        <input id="searchInput" type="text" placeholder="🔍 Buscar por nombre o estilo..." />
       </div>
     </div>
   </div>
@@ -214,16 +259,25 @@
 
 <main class="wrap">
   <section class="hero">
-    <h1>Encuentra tu Mochila Ideal</h1>
-    <p>Diseños urbanos, para viajes, trabajo y estudio con los mejores materiales.</p>
+    <h1>Mochilas Artesanales en Cordón de Seda</h1>
+    <p>Tejidas a mano con hilo y cordón de seda de alta calidad. Piezas únicas, suaves al tacto y duraderas que resaltan la elegancia del trabajo artesanal.</p>
     
     <div class="filters">
       <button class="filter-btn active" onclick="filterCategory('todas', this)">Todas</button>
-      <button class="filter-btn" onclick="filterCategory('Urbana', this)">Urbanas</button>
-      <button class="filter-btn" onclick="filterCategory('Viaje', this)">Viajes</button>
-      <button class="filter-btn" onclick="filterCategory('Escolar', this)">Escolares / Laptop</button>
+      <button class="filter-btn" onclick="filterCategory('Elegante', this)">Elegantes</button>
+      <button class="filter-btn" onclick="filterCategory('Casual', this)">Casual</button>
+      <button class="filter-btn" onclick="filterCategory('Mini', this)">Mini Mochilas</button>
+      <button class="filter-btn" onclick="filterCategory('Mini', this)">Mochilas medianas</button>
+       <button class="filter-btn" onclick="filterCategory('Mini', this)">Mochilas grandes</button>
     </div>
   </section>
+
+  <!-- 📢 BLOQUE DE PUBLICIDAD (Reemplazar con tu banner o código de Adsense) -->
+  <div class="banner-ad">
+    <span>Publicidad / Promoción Especial</span>
+    <h3>✨ ¡Envío gratis por compra de 2 o mas mochilas!</h3>
+    <p>Pregunta por nuestros diseños personalizados y tejidos bajo pedido.</p>
+  </div>
 
   <section class="grid" id="productGrid">
     <!-- Productos renderizados con JS -->
@@ -232,46 +286,50 @@
 
 <footer>
   <div class="wrap">
-    © <span id="year"></span> Mi Tienda de Mochilas — Todos los derechos reservados.
+    © <span id="year"></span> Mochilas Artesanales en Cordón de Seda — Todos los derechos reservados.
   </div>
 </footer>
 
 <script>
-  // Tu número de WhatsApp con código de país (ejemplo: 573001234567)
-  const phoneWhatsApp = "573000000000";
+  // Cambia esto por tu número de WhatsApp con código de país
+  const phoneWhatsApp = "3007241847";
 
-  // Catálogo de productos (Imágenes de prueba)
+  // Catálogo de productos con descripciones
   const products = [
     {
       id: 1,
-      name: "Mochila Urbana Antirrobo",
-      category: "Urbana",
-      price: 35.00,
-      tag: "Más Vendida 🔥",
+      name: "Mochila Seda Dorada Champagne",
+      category: "Elegante",
+      price: 160.000,
+      tag: "Edición Limitada ✨",
+      description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.",
       image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 2,
-      name: "Mochila Viajera Impermeable 40L",
-      category: "Viaje",
-      price: 55.00,
-      tag: "Resistente 🌧️",
-      image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
+      name: "Mini Mochila Seda Rosa Pastel",
+      category: "Mini",
+      price: 130.000,
+      tag: "Más Pedida 🌸",
+      description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.",
+      image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 3,
-      name: "Mochila Ejecutiva Porta Laptop 15.6\"",
-      category: "Escolar",
-      price: 42.50,
-      tag: "Con Puerto USB ⚡",
-      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
+      name: "Mochila Artesanal Multicolor",
+      category: "Casual",
+      price: 140.000,
+      tag: "100% Hecho a mano 🎨",
+      description: "Combinación vibrante de hilos de seda en tonos tierra. Gran resistencia y textura acolchada única.",
+      image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 4,
-      name: "Mochila Minimalista Compacta",
-      category: "Urbana",
-      price: 28.00,
-      image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
+      name: "Mochila Seda Negra Azabache",
+      category: "Elegante",
+      price: 170.00,
+      description: "Elegancia atemporal. Tejida en cordón fino de seda negra con acabados y broches metálicos premium.",
+      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -286,17 +344,17 @@
 
     const filtered = products.filter(p => {
       const matchesCategory = currentCategory === "todas" || p.category === currentCategory;
-      const matchesSearch = p.name.toLowerCase().includes(query);
+      const matchesSearch = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
       return matchesCategory && matchesSearch;
     });
 
     if (filtered.length === 0) {
-      grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">No se encontraron mochilas.</p>`;
+      grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 0;">No se encontraron mochilas que coincidan con tu búsqueda.</p>`;
       return;
     }
 
     filtered.forEach(p => {
-      const message = encodeURIComponent(`Hola, estoy interesado en comprar la *${p.name}* (Precio: $${p.price.toFixed(2)}). ¿Tienen disponibilidad?`);
+      const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: $${p.price.toFixed(2)}). ¿Me das información?`);
       const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
 
       const card = document.createElement("article");
@@ -307,6 +365,7 @@
           <img src="${p.image}" alt="${p.name}" loading="lazy" />
         </div>
         <div class="name">${p.name}</div>
+        <p class="description">${p.description}</p>
         <div class="price">$${p.price.toFixed(2)}</div>
         <div class="actions">
           <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp 📲</a>
