@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAURA DURANGO HAND MADE</title>
 
   <style>
@@ -37,7 +37,7 @@
       top: 0;
       z-index: 12;
       backdrop-filter: blur(12px);
-      background: rgba(247, 244, 238, 1);
+      background: rgba(247, 244, 238, 0.95);
       border-bottom: 1px solid var(--border);
     }
 
@@ -267,15 +267,15 @@
       <button class="filter-btn" onclick="filterCategory('Elegante', this)">Elegantes</button>
       <button class="filter-btn" onclick="filterCategory('Casual', this)">Casual</button>
       <button class="filter-btn" onclick="filterCategory('Mini', this)">Mini Mochilas</button>
-      <button class="filter-btn" onclick="filterCategory('Mini', this)">Mochilas medianas</button>
-       <button class="filter-btn" onclick="filterCategory('Mini', this)">Mochilas grandes</button>
+      <button class="filter-btn" onclick="filterCategory('Mediana', this)">Mochilas medianas</button>
+      <button class="filter-btn" onclick="filterCategory('Grande', this)">Mochilas grandes</button>
     </div>
   </section>
 
-  <!-- 📢 BLOQUE DE PUBLICIDAD (Reemplazar con tu banner o código de Adsense) -->
+  <!-- 📢 BLOQUE DE PUBLICIDAD -->
   <div class="banner-ad">
     <span>Publicidad / Promoción Especial</span>
-    <h3>✨ ¡Envío gratis por compra de 2 o mas mochilas!</h3>
+    <h3>✨ ¡Envío gratis por compra de 2 o más mochilas!</h3>
     <p>Pregunta por nuestros diseños personalizados y tejidos bajo pedido.</p>
   </div>
 
@@ -292,15 +292,15 @@
 
 <script>
   // Cambia esto por tu número de WhatsApp con código de país
-  const phoneWhatsApp = "3007241847";
+  const phoneWhatsApp = "+573007241847";
 
   // Catálogo de productos con descripciones
-  const products =  ]
+  const products = [
     {
       id: 1,
       name: "Mochila Seda Dorada Champagne",
       category: "Elegante",
-      price: 160.000,
+      price: 160000,
       tag: "Edición Limitada ✨",
       description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.",
       image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
@@ -309,7 +309,7 @@
       id: 2,
       name: "Mini Mochila Seda Rosa Pastel",
       category: "Mini",
-      price: 130.000,
+      price: 130000,
       tag: "Más Pedida 🌸",
       description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.",
       image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
@@ -318,7 +318,7 @@
       id: 3,
       name: "Mochila Artesanal Multicolor",
       category: "Casual",
-      price: 140.000,
+      price: 140000,
       tag: "100% Hecho a mano 🎨",
       description: "Combinación vibrante de hilos de seda en tonos tierra. Gran resistencia y textura acolchada única.",
       image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
@@ -327,7 +327,7 @@
       id: 4,
       name: "Mochila Seda Negra Azabache",
       category: "Elegante",
-      price: 170.00,
+      price: 170000,
       description: "Elegancia atemporal. Tejida en cordón fino de seda negra con acabados y broches metálicos premium.",
       image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
     }
@@ -337,6 +337,10 @@
   const grid = document.getElementById("productGrid");
   const searchInput = document.getElementById("searchInput");
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  function formatPrice(amount) {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
+  }
 
   function render() {
     const query = searchInput.value.toLowerCase();
@@ -354,7 +358,7 @@
     }
 
     filtered.forEach(p => {
-      const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: $${p.price.toFixed(2)}). ¿Me das información?`);
+      const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
       const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
 
       const card = document.createElement("article");
@@ -366,7 +370,7 @@
         </div>
         <div class="name">${p.name}</div>
         <p class="description">${p.description}</p>
-        <div class="price">$${p.price.toFixed(2)}</div>
+        <div class="price">${formatPrice(p.price)}</div>
         <div class="actions">
           <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp 📲</a>
         </div>
