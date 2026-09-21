@@ -3,517 +3,662 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiendita Amazon</title>
+  <title>LAURA DURANGO HAND MADE | Mochilas Artesanales</title>
 
   <style>
-    :root{
-      --bg:#0b1220;
-      --card:#121b2f;
-      --text:#e8eefc;
-      --muted:#a9b4d0;
-      --accent:#6ea8fe;
-      --accent2:#8b5cf6;
-      --border: rgba(255,255,255,.08);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,168,254,.25), transparent 60%),
-                  radial-gradient(900px 500px at 90% 0%, rgba(139,92,246,.25), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-    }
-    header{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.65);
-      border-bottom: 1px solid var(--border);
-    }
-    .wrap{max-width:1100px; margin:0 auto; padding: 16px}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .logo{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
-    }
-    .logo .dot{
-      width:34px; height:34px; border-radius:10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 30px rgba(110,168,254,.25);
-    }
-    .search{
-      flex:1;
-      display:flex; gap:10px; align-items:center;
-      max-width:520px;
-    }
-    .search input{
-      width:100%;
-      padding:12px 14px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.7);
-      color:var(--text);
-      outline:none;
-    }
-    .search input::placeholder{color: var(--muted)}
-    .btn{
-      padding:12px 14px; border-radius: 14px;
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.7);
-      color:var(--text);
-      cursor:pointer;
-      font-weight:700;
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border: none;
+    :root {
+      --bg: #f7f4ee;           /* Fondo beige cálido */
+      --header-bg: #e8dfd1;    /* Fondo de encabezado diferenciado */
+      --card: #ffffff;         /* Fondo de tarjetas blanco */
+      --text: #2c2523;         /* Texto marrón oscuro elegante */
+      --muted: #786c66;        /* Texto secundario */
+      --accent: #b07d52;       /* Tono terracota/artesanal */
+      --accent-hover: #8c5e37;
+      --border: #e6dfd5;       /* Bordes suaves */
+      --whatsapp: #25d366;     /* Verde WhatsApp */
+      --instagram: #e1306c;    /* Color Instagram */
+      --facebook: #1877f2;     /* Color Facebook */
     }
 
-    .hero{
-      padding: 28px 0 6px;
-    }
-    .hero-grid{
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .hero-grid{grid-template-columns:1fr}
-    }
-    .hero-card{
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.55);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
-    }
-    .hero-card h1{
-      margin:0 0 10px;
-      font-size: clamp(26px, 3.2vw, 40px);
-      line-height:1.1;
-    }
-    .hero-card p{
-      margin:0 0 16px;
-      color:var(--muted);
-      max-width: 60ch;
-    }
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .chip{
-      padding:8px 12px;
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.7);
-      border-radius: 999px;
-      color: var(--muted);
-      font-weight:700;
-      font-size: 13px;
-    }
+    * { box-sizing: border-box; }
 
-    .filters{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
-      align-items:flex-start;
-    }
-    .filter{
-      width: calc(50% - 5px);
-      min-width: 190px;
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.55);
-      border-radius: 18px;
-      padding: 14px;
-    }
-    .filter label{
-      display:block; font-size:12px; color:var(--muted); font-weight:800; margin-bottom:8px;
-    }
-    .filter select{
-      width:100%;
-      padding:10px 12px;
-      border-radius: 12px;
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.7);
-      color:var(--text);
-      outline:none;
-      font-weight:700;
-    }
-
-    .section-title{
-      margin: 18px 0 10px;
-      display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-    }
-    .section-title h2{margin:0; font-size:20px}
-    .section-title span{color:var(--muted); font-weight:800; font-size: 13px}
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      padding: 10px 0 40px;
-    }
-    @media (max-width: 1000px){ .grid{grid-template-columns: repeat(3, 1fr)} }
-    @media (max-width: 800px){ .grid{grid-template-columns: repeat(2, 1fr)} }
-    @media (max-width: 520px){ .grid{grid-template-columns: 1fr} }
-
-    .card{
-      border:1px solid var(--border);
-      background: rgba(18,27,47,.55);
-      border-radius: 18px;
-      padding: 12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-height: 320px;
-    }
-    .img{
-      width:100%;
-      height: 160px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
-    }
-    .img img{
-      width:100%; height:100%; object-fit:cover;
-    }
-    .name{
-      font-weight: 900;
-      line-height: 1.2;
-      margin-top: 2px;
-      font-size: 15px;
-      min-height: 40px;
-    }
-    .meta{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      color: var(--muted);
-      font-weight:800;
-      font-size: 13px;
-      margin-top:auto;
-    }
-    .price{
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
       color: var(--text);
-      font-weight: 950;
     }
-    .rating{
-      display:flex; align-items:center; gap:6px;
-      white-space:nowrap;
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
     }
-    .stars{
-      color: #fbbf24;
+
+    /* 📌 Barra Superior de Redes Sociales */
+    .top-social-bar {
+      background: var(--text);
+      color: #fff;
+      font-size: 13px;
+      padding: 6px 0;
+    }
+
+    .top-social-bar .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .social-links a:hover { opacity: 0.8; }
+
+    /* 📌 Header Principal con Color Diferenciado */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .search {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      outline: none;
+    }
+
+    /* 📌 Hero Section */
+    .hero {
+      padding: 40px 0 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 54px); /* Título Agrandado */
+      color: var(--text);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 0 auto 24px;
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* 📢 Promoción Especial */
+    .banner-ad {
+      background: #efe8dc;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+
+    .banner-ad span {
+      font-size: 11px;
+      text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: 900;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .banner-ad h3 { margin: 0 0 6px; color: var(--text); }
+    .banner-ad p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    /* 📌 Rejilla de Productos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: transform 0.2s;
+    }
+
+    .card:hover { transform: translateY(-4px); }
+
+    .imgWrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fdfbf7;
+      cursor: pointer;
+    }
+
+    .imgWrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .imgWrap:hover img { transform: scale(1.05); }
+
+    .tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      z-index: 2;
+    }
+
+    .name { font-weight: 700; font-size: 17px; margin-top: 4px; }
+    .description { font-size: 13px; color: var(--muted); line-height: 1.4; margin: 0; }
+    .price { font-size: 18px; font-weight: 800; color: var(--accent); margin-top: auto; }
+
+    .actions { display: flex; flex-direction: column; gap: 8px; }
+
+    .btn-view {
+      width: 100%;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-ws {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: var(--whatsapp);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    /* 🛡️ Sección de Garantías */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 50px 0;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+
+    .feature-item {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-item div { font-size: 28px; margin-bottom: 8px; }
+    .feature-item h4 { margin: 0 0 4px; font-size: 16px; }
+    .feature-item p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    /* ⭐ Sección de Testimonios */
+    .testimonials {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .testimonials h2 { font-size: 26px; margin-bottom: 20px; }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+    .testimonial-card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .testimonial-card p { italic; font-size: 14px; margin-bottom: 10px; }
+    .testimonial-card strong { font-size: 13px; color: var(--accent); }
+
+    /* 🔍 Modal para Ver Imagen Flotante */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .modal-body { padding: 20px; }
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: #fff;
+      border: none;
+      font-size: 20px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* 📌 Pie de página completado */
+    footer {
+      background: var(--header-bg);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 20px;
+      margin-top: 60px;
+      color: var(--text);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; text-align: center; } }
+
+    .footer-col h4 { margin-top: 0; color: var(--accent); }
+    .footer-col p, .footer-col a { color: var(--muted); font-size: 14px; text-decoration: none; }
+    .footer-col a:hover { color: var(--accent); }
+
+    .copyright {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      text-align: center;
+      color: var(--muted);
       font-size: 13px;
     }
-    .actions{
-      display:flex; gap:10px; align-items:center;
-    }
-    .link{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      width:100%;
-      text-decoration:none;
-      border-radius: 14px;
-      padding: 12px 12px;
-      background: linear-gradient(135deg, rgba(110,168,254,.95), rgba(139,92,246,.95));
-      border: none;
-      color: #071022;
-      font-weight: 1000;
-    }
-    .tag{
-      position:absolute;
-      margin: 10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.15);
-      color: #fff;
-      font-weight: 950;
-      font-size: 12px;
-    }
-    .imgWrap{position:relative; width:100%; height:160px;}
-
-    footer{
-      border-top:1px solid var(--border);
-      padding: 22px 0;
-      color: var(--muted);
-    }
-    .foot{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
-      flex-wrap:wrap;
-    }
-    .small{font-size:13px; line-height:1.5}
   </style>
 </head>
 <body>
 
+<!-- 📌 Barra Superior de Contacto y Redes -->
+<div class="top-social-bar">
+  <div class="wrap">
+    <span>🇨🇴 Envíos a toda Colombia</span>
+    <div class="social-links">
+      <a href="https://instagram.com/TU_USUARIO" target="_blank">📸 Instagram</a>
+      <a href="https://facebook.com/TU_USUARIO" target="_blank">📘 Facebook</a>
+      <a href="https://wa.me/573007241847" target="_blank">📲 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- 📌 Encabezado Principal con Fondo Diferenciado -->
 <header>
   <div class="wrap">
     <div class="topbar">
-      <div class="logo" aria-label="Logo Tiendita Amazon">
-        <div class="dot"></div>
-        <div>Tiendita Amazon 🛒</div>
-      </div>
-
+      <div class="logo">🧵 LAURA DURANGO HAND MADE</div>
       <div class="search">
-        <input id="searchInput" type="text" placeholder="🔎 Buscar productos..." />
-        <button class="btn" id="clearBtn" title="Limpiar">Limpiar</button>
+        <input id="searchInput" type="text" placeholder="🔍 Buscar por nombre o estilo..." />
       </div>
-
-      <button class="btn primary" id="contactBtn">📩 Contacto</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
+  <!-- 📌 Sección Hero -->
   <section class="hero">
-    <div class="hero-grid">
-      <div class="hero-card">
-        <h1>Encuentra productos increíbles en Amazon</h1>
-        <p>
-          Esta es una tienda simple tipo catálogo. Reemplaza las imágenes, nombres y
-          enlaces con tus productos y links de afiliado de Amazon.
-        </p>
-        <div class="chips">
-          <div class="chip">✅ Catálogo rápido</div>
-          <div class="chip">🔎 Búsqueda</div>
-          <div class="chip">⭐ Ordenar por rating</div>
-          <div class="chip">📦 Enlaces directos</div>
-        </div>
-      </div>
-
-      <div class="filters">
-        <div class="filter">
-          <label for="categorySelect">Categoría</label>
-          <select id="categorySelect">
-            <option value="todas">Todas</option>
-          </select>
-        </div>
-        <div class="filter">
-          <label for="sortSelect">Orden</label>
-          <select id="sortSelect">
-            <option value="relevancia">Relevancia</option>
-            <option value="rating_desc">⭐ Rating (alto)</option>
-            <option value="price_asc">💲 Precio (bajo)</option>
-            <option value="price_desc">💲 Precio (alto)</option>
-          </select>
-        </div>
-      </div>
+    <h1>Mochilas Artesanales en Cordón de Seda</h1>
+    <p>Tejidas a mano con hilo y cordón de seda de alta calidad. Piezas únicas, suaves al tacto y duraderas que resaltan la elegancia del trabajo artesanal.</p>
+    
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCategory('todas', this)">Todas</button>
+      <button class="filter-btn" onclick="filterCategory('Elegante', this)">Elegantes</button>
+      <button class="filter-btn" onclick="filterCategory('Casual', this)">Casual</button>
+      <button class="filter-btn" onclick="filterCategory('Mini', this)">Mini Mochilas</button>
+      <button class="filter-btn" onclick="filterCategory('Mediana', this)">Mochilas medianas</button>
+      <button class="filter-btn" onclick="filterCategory('Grande', this)">Mochilas grandes</button>
     </div>
   </section>
 
-  <div class="section-title">
-    <h2>Productos destacados</h2>
-    <span id="resultsCount">0 resultados</span>
+  <!-- 📢 Banner Promocional -->
+  <div class="banner-ad">
+    <span>Publicidad / Promoción Especial</span>
+    <h3>✨ ¡Envío gratis por compra de 2 o más mochilas!</h3>
+    <p>Pregunta por nuestros diseños personalizados y tejidos bajo pedido.</p>
   </div>
 
-  <section class="grid" id="productGrid" aria-live="polite">
-    <!-- Cards inyectadas por JS -->
+  <!-- 📌 Rejilla de Productos -->
+  <section class="grid" id="productGrid">
+    <!-- Productos renderizados dinámicamente con JS -->
+  </section>
+
+  <!-- 🛡️ Sección de Garantías e Información de Venta -->
+  <section class="features">
+    <div class="feature-item">
+      <div>📦</div>
+      <h4>Envíos Seguros</h4>
+      <p>Coordinamos tus entregas directas a todo el país.</p>
+    </div>
+    <div class="feature-item">
+      <div>🧵</div>
+      <h4>100% Artesanal</h4>
+      <p>Cada pieza es cuidada en cada punto y detalle.</p>
+    </div>
+    <div class="feature-item">
+      <div>💳</div>
+      <h4>Pago Fácil</h4>
+      <p>Aceptamos transferencias y pagos por Nequi/Daviplata.</p>
+    </div>
+  </section>
+
+  <!-- ⭐ Testimonios -->
+  <section class="testimonials">
+    <h2>Lo que dicen nuestras clientas</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>"Quedé enamorada de mi mochila. El cordón de seda se siente súper suave y los acabados son impeclables."</p>
+        <strong>— Carolina M. (Bogotá)</strong>
+      </div>
+      <div class="testimonial-card">
+        <p>"Excelente servicio por WhatsApp. Llegó súper rápido y el empaque muy bonito para regalo."</p>
+        <strong>— Andrea R. (Medellín)</strong>
+      </div>
+    </div>
   </section>
 </main>
 
+<!-- 🔍 Modal para Ampliar Imagen -->
+<div class="modal" id="imageModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modalImg" class="modal-img" src="" alt="" />
+    <div class="modal-body">
+      <h3 id="modalTitle" style="margin: 0 0 8px;"></h3>
+      <p id="modalDesc" style="color: var(--muted); font-size: 14px; margin: 0 0 16px;"></p>
+      <a id="modalWsBtn" class="btn-ws" href="" target="_blank">Pedir por WhatsApp 📲</a>
+    </div>
+  </div>
+</div>
+
+<!-- 📌 Pie de Página -->
 <footer>
   <div class="wrap">
-    <div class="foot">
-      <div class="small">
-        <strong>ℹ️ Aviso:</strong> Los enlaces pueden ser de afiliado.
-        <br/>
-        Revisa las políticas de Amazon Associates antes de publicar.
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Laura Durango Hand Made</h4>
+        <p>Diseño y confección de mochilas exclusivas tejidas a mano en cordón de seda.</p>
       </div>
-      <div class="small">
-        © <span id="year"></span> Tiendita Amazon — Hecho para catálogo.
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>📱 WhatsApp: +57 300 724 1847<br>📍 Colombia</p>
       </div>
+      <div class="footer-col">
+        <h4>Síguenos</h4>
+        <p><a href="https://instagram.com/TU_USUARIO" target="_blank">Instagram</a></p>
+        <p><a href="https://facebook.com/TU_USUARIO" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="year"></span> Laura Durango Hand Made — Todos los derechos reservados.
     </div>
   </div>
 </footer>
 
 <script>
-  // ✅ Reemplaza esto con tus links de afiliado de Amazon
-  // Estructura:
-  // { id, name, category, price, rating, image, tag, amazonUrl }
+  const phoneWhatsApp = "+573007241847";
+
+  // Catálogo de productos
   const products = [
     {
-      id: "p1",
-      name: "Audífonos Bluetooth con cancelación de ruido",
-      category: "Audio",
-      price: 39.99,
-      rating: 4.6,
-      image: "https://images.unsplash.com/photo-1518441902117-f0a7f1f1d5f5?auto=format&fit=crop&w=800&q=60",
-      tag: "Top 🔥",
-      amazonUrl: "https://www.amazon.com/" // <-- cambia por tu link afiliado
+      id: 1,
+      name: "Mochila Seda Dorada Champagne",
+      category: "Elegante",
+      price: 160000,
+      tag: "Edición Limitada ✨",
+      description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.",
+      image: "A1.jfif"
     },
     {
-      id: "p2",
-      name: "Smartwatch resistente al agua (Sport)",
-      category: "Wearables",
-      price: 59.90,
-      rating: 4.4,
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=60",
-      amazonUrl: "https://www.amazon.com/"
+      id: 2,
+      name: "Mini Mochila Seda Rosa Pastel",
+      category: "Mini",
+      price: 130000,
+      tag: "Más Pedida 🌸",
+      description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.",
+      image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
     },
     {
-      id: "p3",
-      name: "Teclado mecánico gamer RGB",
-      category: "Computación",
-      price: 74.50,
-      rating: 4.7,
-      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60",
-      tag: "Recomendado",
-      amazonUrl: "https://www.amazon.com/"
+      id: 3,
+      name: "Mochila Artesanal Multicolor",
+      category: "Casual",
+      price: 140000,
+      tag: "100% Hecho a mano 🎨",
+      description: "Combinación vibrante de hilos de seda en tonos tierra. Gran resistencia y textura acolchada única.",
+      image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
     },
     {
-      id: "p4",
-      name: "Cámara de seguridad WiFi 1080p",
-      category: "Hogar",
-      price: 28.99,
-      rating: 4.3,
-      image: "https://images.unsplash.com/photo-1583394838336-acd977736f58?auto=format&fit=crop&w=800&q=60",
-      amazonUrl: "https://www.amazon.com/"
+      id: 4,
+      name: "Mochila Seda Negra Azabache",
+      category: "Elegante",
+      price: 170000,
+      description: "Elegancia atemporal. Tejida en cordón fino de seda negra con acabados y broches metálicos premium.",
+      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
     },
     {
-      id: "p5",
-      name: "Libreta premium para productividad (A5)",
-      category: "Oficina",
-      price: 12.49,
-      rating: 4.5,
-      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=60",
-      amazonUrl: "https://www.amazon.com/"
+      id: 5,
+      name: "Mochila Seda Blanca Azabache",
+      category: "Elegante",
+      price: 170000,
+      description: "Elegancia atemporal. Tejida en cordón fino de seda blanca con acabados y broches metálicos premium.",
+      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
     },
     {
-      id: "p6",
-      name: "Lámpara LED para escritorio con USB",
-      category: "Hogar",
-      price: 19.99,
-      rating: 4.2,
-      image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=60",
-      amazonUrl: "https://www.amazon.com/"
-    },
-    {
-      id: "p7",
-      name: "Power bank 20.000mAh (carga rápida)",
-      category: "Movilidad",
-      price: 34.90,
-      rating: 4.6,
-      image: "https://images.unsplash.com/photo-1585070364775-5b5f4d2d4cc7?auto=format&fit=crop&w=800&q=60",
-      tag: "Ahorra ⚡",
-      amazonUrl: "https://www.amazon.com/"
-    },
-    {
-      id: "p8",
-      name: "Mochila urbana impermeable (anti-rasgaduras)",
-      category: "Movilidad",
-      price: 22.99,
-      rating: 4.4,
-      image: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=800&q=60",
-      amazonUrl: "https://www.amazon.com/"
+      id: 6,
+      name: "Mochila Seda Beige Azabache",
+      category: "Elegante",
+      price: 160000,
+      description: "Elegancia atemporal. Tejida en cordón fino de seda Beige con acabados y broches metálicos premium.",
+      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
+  let currentCategory = "todas";
   const grid = document.getElementById("productGrid");
   const searchInput = document.getElementById("searchInput");
-  const categorySelect = document.getElementById("categorySelect");
-  const sortSelect = document.getElementById("sortSelect");
-  const resultsCount = document.getElementById("resultsCount");
-  const clearBtn = document.getElementById("clearBtn");
-  const contactBtn = document.getElementById("contactBtn");
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Construir categorías únicas
-  const categories = Array.from(new Set(products.map(p => p.category))).sort();
-  for (const c of categories){
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    categorySelect.appendChild(opt);
+  function formatPrice(amount) {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
   }
 
-  function formatPrice(value){
-    return value.toLocaleString("es-ES", { style: "currency", currency: "USD" });
-  }
-
-  function stars(rating){
-    // rating 0-5 -> estrellas "★★★★☆"
-    const full = Math.floor(rating);
-    const half = (rating - full) >= 0.5 ? 1 : 0;
-    const totalFull = Math.min(5, full + half);
-    return "★★★★★".slice(0, totalFull) + "☆☆☆☆☆".slice(0, 5-totalFull);
-  }
-
-  function getFilteredProducts(){
-    const query = searchInput.value.trim().toLowerCase();
-    const cat = categorySelect.value;
-    let list = [...products];
-
-    if (cat !== "todas"){
-      list = list.filter(p => p.category === cat);
-    }
-
-    if (query){
-      list = list.filter(p => (p.name + " " + p.category).toLowerCase().includes(query));
-    }
-
-    // Orden
-    const sort = sortSelect.value;
-    if (sort === "rating_desc"){
-      list.sort((a,b) => b.rating - a.rating);
-    } else if (sort === "price_asc"){
-      list.sort((a,b) => a.price - b.price);
-    } else if (sort === "price_desc"){
-      list.sort((a,b) => b.price - a.price);
-    } // relevancia -> conserva orden del array
-
-    return list;
-  }
-
-  function render(){
-    const list = getFilteredProducts();
-    resultsCount.textContent = `${list.length} resultados`;
-
+  function render() {
+    const query = searchInput.value.toLowerCase();
     grid.innerHTML = "";
-    list.forEach(p => {
+
+    const filtered = products.filter(p => {
+      const matchesCategory = currentCategory === "todas" || p.category === currentCategory;
+      const matchesSearch = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 0;">No se encontraron mochilas que coincidan con tu búsqueda.</p>`;
+      return;
+    }
+
+    filtered.forEach(p => {
+      const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
+      const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+
       const card = document.createElement("article");
       card.className = "card";
-
       card.innerHTML = `
-        <div class="imgWrap">
+        <div class="imgWrap" onclick="openModal(${p.id})">
           ${p.tag ? `<div class="tag">${p.tag}</div>` : ""}
-          <div class="img">
-            <img src="${p.image}" alt="${p.name}" loading="lazy" />
-          </div>
+          <img src="${p.image}" alt="${p.name}" loading="lazy" />
         </div>
-
         <div class="name">${p.name}</div>
-
-        <div class="meta">
-          <div class="rating">
-            <span class="stars" aria-hidden="true">${stars(p.rating)}</span>
-            <span>${p.rating.toFixed(1)}</span>
-          </div>
-          <div class="price">${formatPrice(p.price)}</div>
-        </div>
-
+        <p class="description">${p.description}</p>
+        <div class="price">${formatPrice(p.price)}</div>
         <div class="actions">
-          <a class="link" href="${p.amazonUrl}" target="_blank" rel="noopener noreferrer">
-            Ver en Amazon ➜
-          </a>
+          <button class="btn-view" onclick="openModal(${p.id})">👁️ Ver ampliación</button>
+          <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp 📲</a>
         </div>
       `;
       grid.appendChild(card);
     });
   }
 
-  // Eventos
-  searchInput.addEventListener("input", render);
-  categorySelect.addEventListener("change", render);
-  sortSelect.addEventListener("change", render);
-
-  clearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    categorySelect.value = "todas";
-    sortSelect.value = "relevancia";
+  function filterCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
     render();
-  });
+  }
 
-  contactBtn.addEventListener("click", () => {
-    alert("📩 Contacto: aquí puedes poner tu WhatsApp, email o formulario.");
-  });
+  // Lógica del Modal
+  function openModal(id) {
+    const product = products.find(p => p.id === id);
+    if(!product) return;
 
-  // Inicial
+    document.getElementById("modalImg").src = product.image;
+    document.getElementById("modalTitle").textContent = product.name;
+    document.getElementById("modalDesc").textContent = `${product.description} — Precio: ${formatPrice(product.price)}`;
+    
+    const message = encodeURIComponent(`Hola, me interesa encargar la *${product.name}* en cordón de seda (Precio: ${formatPrice(product.price)}). ¿Me das información?`);
+    document.getElementById("modalWsBtn").href = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+
+    document.getElementById("imageModal").classList.add("active");
+  }
+
+  function closeModal() {
+    document.getElementById("imageModal").classList.remove("active");
+  }
+
+  // Cerrar modal si se hace clic fuera de la ventana
+  window.onclick = function(e) {
+    const modal = document.getElementById("imageModal");
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+
+  searchInput.addEventListener("input", render);
   render();
 </script>
 
