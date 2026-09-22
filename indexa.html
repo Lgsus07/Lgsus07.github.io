@@ -3,408 +3,568 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAURA DURANGO HAND MADE</title>
+  <title>LAURA DURANGO HAND MADE | Tienda Oficial</title>
 
   <style>
+    /* 📌 Identidad de Marca Estilo Adidas */
     :root {
-      --bg: #f7f4ee;           /* Fondo beige cálido */
-      --card: #ffffff;         /* Fondo de tarjetas blanco */
-      --text: #2c2523;         /* Texto marrón oscuro elegante */
-      --muted: #786c66;        /* Texto secundario */
-      --accent: #b07d52;       /* Tono terracota/artesanal */
-      --accent-hover: #8c5e37;
-      --border: #e6dfd5;       /* Bordes suaves */
-      --whatsapp: #25d366;     /* Verde WhatsApp */
+      --black: #000000;
+      --white: #ffffff;
+      --gray-light: #ebedee;
+      --gray-mid: #767677;
+      --accent-green: #25d366;
+      --font-main: 'AdihausDIN', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+    }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--white);
+      color: var(--black);
     }
 
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
+    /* 📌 Barra de Anuncios Superior (Ticker) */
+    .top-bar {
+      background: var(--black);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    /* 📌 Header Principal */
     header {
       position: sticky;
       top: 0;
-      z-index: 12;
-      backdrop-filter: blur(12px);
-      background: rgba(247, 244, 238, 0.95);
-      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-light);
     }
 
-    .topbar {
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+      padding: 0 20px;
+      height: 60px;
     }
 
-    .logo {
-      font-weight: 700;
-      font-size: 24px;
+    .brand-logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    .nav-categories {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
+      gap: 20px;
+      list-style: none;
     }
 
-    .search {
-      flex: 1;
-      max-width: 400px;
+    .nav-categories button {
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      padding: 18px 0;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s;
     }
 
-    .search input {
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #ffffff;
-      color: var(--text);
+    .nav-categories button.active,
+    .nav-categories button:hover {
+      border-bottom-color: var(--black);
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      background: var(--gray-light);
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      width: 200px;
       outline: none;
     }
 
-    .hero {
-      padding: 30px 0 10px;
-      text-align: center;
+    /* 📌 Hero Banner Principal */
+    .hero-banner {
+      background: var(--black);
+      color: var(--white);
+      padding: 80px 20px;
+      text-align: left;
+      position: relative;
     }
 
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: clamp(28px, 4vw, 42px);
-      color: var(--text);
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .hero p {
-      color: var(--muted);
-      margin: 0 auto 20px;
-      max-width: 650px;
-      line-height: 1.5;
+    .hero-content h1 {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 16px;
+      font-style: italic;
     }
 
-    .filters {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .hero-content p {
+      font-size: 16px;
+      max-width: 500px;
+      color: #ccc;
       margin-bottom: 24px;
     }
 
-    .filter-btn {
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    /* 📢 Estilos de Publicidad */
-    .banner-ad {
-      background: #efe8dc;
-      border: 2px dashed var(--accent);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      margin: 20px 0 30px;
-    }
-
-    .banner-ad span {
-      font-size: 11px;
+    .btn-adidas {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 6px;
+      letter-spacing: 2px;
+      padding: 14px 28px;
+      border: 1px solid var(--white);
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .banner-ad h3 {
-      margin: 0 0 6px;
-      color: var(--text);
+    .btn-adidas:hover {
+      color: var(--gray-mid);
     }
 
-    .banner-ad p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
+    .btn-adidas.btn-dark {
+      background: var(--black);
+      color: var(--white);
+      border: 1px solid var(--black);
+    }
+
+    /* 📌 Sección del Catalogo / Grid */
+    .catalog-section {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-style: italic;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
     @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
 
+    /* 📌 Tarjetas de Producto */
     .card {
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 16px;
-      padding: 14px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s ease;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      background: #fff;
     }
 
-    .imgWrap {
+    .card:hover {
+      border-color: var(--black);
+    }
+
+    .img-wrap {
       position: relative;
       width: 100%;
-      height: 220px;
-      border-radius: 12px;
+      aspect-ratio: 1 / 1;
+      background: var(--gray-light);
       overflow: hidden;
-      background: #fdfbf7;
+      cursor: pointer;
     }
 
-    .imgWrap img {
+    .img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .tag {
+    .badge-price {
       position: absolute;
-      top: 8px;
+      bottom: 8px;
       left: 8px;
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      border: 1px solid var(--border);
-    }
-
-    .name {
-      font-weight: 700;
-      font-size: 17px;
-      margin-top: 4px;
-    }
-
-    .description {
+      background: var(--white);
+      padding: 4px 8px;
       font-size: 13px;
-      color: var(--muted);
-      line-height: 1.4;
-      margin: 0;
+      font-weight: 700;
     }
 
-    .price {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--accent);
-      margin-top: auto;
-    }
-
-    .actions {
+    .card-info {
+      padding: 12px 4px;
       display: flex;
-      gap: 8px;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .tag-text {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      font-weight: 700;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
     }
 
     .btn-ws {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
+      background: var(--black);
+      color: var(--white);
       border: none;
-      background: var(--whatsapp);
-      color: #fff;
+      width: 100%;
+      padding: 12px;
+      font-size: 12px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       cursor: pointer;
-      text-decoration: none;
+      margin-top: auto;
       text-align: center;
-      display: inline-block;
     }
 
-    footer {
-      border-top: 1px solid var(--border);
+    .btn-ws:hover {
+      background: #333;
+    }
+
+    /* 📌 Banner Promocional */
+    .promo-strip {
+      background: var(--gray-light);
+      padding: 40px 20px;
+      margin: 60px 0;
       text-align: center;
-      padding: 24px 0;
-      margin-top: 40px;
-      color: var(--muted);
+    }
+
+    .promo-strip h2 {
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* 📌 Modal de Producto */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--white);
+      max-width: 800px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    @media (max-width: 600px) { .modal-content { grid-template-columns: 1fr; } }
+
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: var(--gray-light);
+    }
+
+    .modal-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* 📌 Footer */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 60px 20px 20px;
+      margin-top: 80px;
+    }
+
+    .footer-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 768px) { .footer-wrap { grid-template-columns: 1fr; } }
+
+    .footer-col h4 {
       font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .footer-col p, .footer-col a {
+      color: #999;
+      font-size: 13px;
+      line-height: 1.8;
+      display: block;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .copy {
+      text-align: center;
+      color: #666;
+      font-size: 11px;
+      margin-top: 20px;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="logo">🧵LAURA DURANGO HAND MADE</div>
-      <div class="search">
-        <input id="searchInput" type="text" placeholder="🔍 Buscar por nombre o estilo..." />
+  <!-- 📌 Ticker / Barra Superior -->
+  <div class="top-bar">
+    ⚡ ENVÍO GRATIS POR COMPRA DE 2 O MÁS MOCHILAS • ENVÍOS A TODA COLOMBIA 🇨🇴
+  </div>
+
+  <!-- 📌 Navegación Principal -->
+  <header>
+    <div class="nav-container">
+      <div class="brand-logo">LAURA DURANGO</div>
+      
+      <nav>
+        <ul class="nav-categories">
+          <li><button class="active" onclick="filterCat('todas', this)">TODAS</button></li>
+          <li><button onclick="filterCat('Elegante', this)">ELEGANTES</button></li>
+          <li><button onclick="filterCat('Casual', this)">CASUAL</button></li>
+          <li><button onclick="filterCat('Mini', this)">MINI MOCHILAS</button></li>
+          <li><button onclick="filterCat('Mochilas grandes', this)">GRANDES</button></li>
+        </ul>
+      </nav>
+
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="BUSCAR..." />
+      </div>
+    </div>
+  </header>
+
+  <!-- 📌 Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Seda & Tradición</h1>
+      <p>Mochilas artesanales tejidas a mano en cordón de seda de alta calidad. Piezas únicas estructuradas para destacar.</p>
+      <a href="#catalogo" class="btn-adidas">VER CATÁLOGO &rarr;</a>
+    </div>
+  </section>
+
+  <!-- 📌 Catálogo de Productos -->
+  <main class="catalog-section" id="catalogo">
+    <h2 class="section-title">Nuestra Colección</h2>
+    <div class="grid" id="productGrid"></div>
+  </main>
+
+  <!-- 📌 Banner Promocional -->
+  <section class="promo-strip">
+    <h2>¿Buscas un diseño personalizado?</h2>
+    <p style="margin-bottom: 16px; color: var(--gray-mid);">Tejemos piezas exclusivas bajo pedido con la combinación de colores que elijas.</p>
+    <a href="https://wa.me/573007241847" target="_blank" class="btn-adidas btn-dark">CONTACTAR POR WHATSAPP</a>
+  </section>
+
+  <!-- 📌 Modal de Producto -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <img id="mImg" class="modal-img" src="" alt="" />
+      <div class="modal-body">
+        <span class="tag-text" id="mTag">EDICIÓN ARTESANAL</span>
+        <h2 id="mTitle" style="text-transform: uppercase; margin: 8px 0;"></h2>
+        <p id="mDesc" style="color: var(--gray-mid); font-size: 13px; margin-bottom: 16px;"></p>
+        <div id="mPrice" style="font-size: 20px; font-weight: 900; margin-bottom: 24px;"></div>
+        <a id="mWsBtn" class="btn-ws" href="" target="_blank">Pedir vía WhatsApp</a>
       </div>
     </div>
   </div>
-</header>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>Mochilas Artesanales en Cordón de Seda</h1>
-    <p>Tejidas a mano con hilo y cordón de seda de alta calidad. Piezas únicas, suaves al tacto y duraderas que resaltan la elegancia del trabajo artesanal.</p>
-    
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCategory('todas', this)">Todas</button>
-      <button class="filter-btn" onclick="filterCategory('Elegante', this)">Elegantes</button>
-      <button class="filter-btn" onclick="filterCategory('Casual', this)">Casual</button>
-      <button class="filter-btn" onclick="filterCategory('Mini', this)">Mini Mochilas</button>
-      <button class="filter-btn" onclick="filterCategory('Mediana', this)">Mochilas medianas</button>
-      <button class="filter-btn" onclick="filterCategory('Grande', this)">Mochilas grandes</button>
+  <!-- 📌 Pie de Página -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-col">
+        <h4>LAURA DURANGO HAND MADE</h4>
+        <p>Diseño y confección de mochilas exclusivas tejidas en cordón de seda. Arte colombiano hecho a mano.</p>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACTO</h4>
+        <p>📱 WhatsApp: +57 300 724 1847</p>
+        <p>📍 Envíos directos desde Colombia</p>
+      </div>
+      <div class="footer-col">
+        <h4>SÍGUENOS</h4>
+        <a href="https://www.instagram.com/ld_handmade?igsh=MWdvcnI2Nms1NG02Zg%3D%3D" target="_blank">Instagram: @ld_handmade</a>
+        <a href="https://www.facebook.com/people/Laura-Durango-Handmade/61563706183223/?sk=about" target="_blank">Facebook: Laura Durango Handmade</a>
+      </div>
     </div>
-  </section>
+    <div class="copy">
+      © <span id="year"></span> LAURA DURANGO HAND MADE — TODOS LOS DERECHOS RESERVADOS.
+    </div>
+  </footer>
 
-  <!-- 📢 BLOQUE DE PUBLICIDAD -->
-  <div class="banner-ad">
-    <span>Publicidad / Promoción Especial</span>
-    <h3>✨ ¡Envío gratis por compra de 2 o más mochilas!</h3>
-    <p>Pregunta por nuestros diseños personalizados y tejidos bajo pedido.</p>
-  </div>
+  <script>
+    const phoneWhatsApp = "+573007241847";
 
-  <section class="grid" id="productGrid">
-    <!-- Productos renderizados con JS -->
-  </section>
-</main>
+    // Mismos datos originales preservados
+    const products = [
+      { id: 1, name: "Mochila Seda Dorada Champagne", category: "Elegante", price: 160000, tag: "Edición Limitada", description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.", image: "A1.jfif" },
+      { id: 2, name: "Mini Mochila Seda Rosa Pastel", category: "Mini", price: 130000, tag: "Más Pedida", description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.", image: "A3.jfif" },
+      { id: 3, name: "Mochila Artesanal Multicolor", category: "Casual", price: 140000, tag: "100% Hecho a mano", description: "Combinación vibrante de hilos de seda en tonos tierra. Gran resistencia y textura acolchada única.", image: "A4.jfif" },
+      { id: 4, name: "Mochila Seda Negra Azabache", category: "Elegante", price: 170000, tag: "Elegante", description: "Elegancia atemporal. Tejida en cordón fino de seda negra con acabados y broches metálicos premium.", image: "A5.jfif" },
+      { id: 5, name: "Mochila Seda Blanca Azabache", category: "Elegante", price: 170000, tag: "Elegante", description: "Elegancia atemporal. Tejida en cordón fino de seda blanca con acabados y broches metálicos premium.", image: "A4.jfif" },
+      { id: 6, name: "Mochila Seda Beige Azabache", category: "Elegante", price: 160000, tag: "Elegante", description: "Elegancia atemporal. Tejida en cordón fino de seda Beige con acabados y broches metálicos premium.", image: "A1.jfif" },
+      { id: 7, name: "Mochila Seda contract", category: "Mochilas grandes", price: 180000, tag: "Grande", description: "Elegancia atemporal. Tejida en cordón fino de seda acabados y broches metálicos premium.", image: "A2.webp" }
+    ];
 
-<footer>
-  <div class="wrap">
-    © <span id="year"></span> Mochilas Artesanales en Cordón de Seda — Todos los derechos reservados.
-  </div>
-</footer>
+    let currentCategory = "todas";
+    const grid = document.getElementById("productGrid");
+    const searchInput = document.getElementById("searchInput");
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-<script>
-  // Cambia esto por tu número de WhatsApp con código de país
-  const phoneWhatsApp = "+573007241847";
-
-  // Catálogo de productos con descripciones
-  const products = [
-    {
-      id: 1,
-      name: "Mochila Seda Dorada Champagne",
-      category: "Elegante",
-      price: 160000,
-      tag: "Edición Limitada ✨",
-      description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.",
-      image: "A1.jfif"
-    },
-    {
-      id: 2,
-      name: "Mini Mochila Seda Rosa Pastel",
-      category: "Mini",
-      price: 130000,
-      tag: "Más Pedida 🌸",
-      description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.",
-      image: "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 3,
-      name: "Mochila Artesanal Multicolor",
-      category: "Casual",
-      price: 140000,
-      tag: "100% Hecho a mano 🎨",
-      description: "Combinación vibrante de hilos de seda en tonos tierra. Gran resistencia y textura acolchada única.",
-      image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      id: 4,
-      name: "Mochila Seda Negra Azabache",
-      category: "Elegante",
-      price: 170000,
-      description: "Elegancia atemporal. Tejida en cordón fino de seda negra con acabados y broches metálicos premium.",
-      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
-    },
-     {
-      id: 5,
-      name: "Mochila Seda Blanca Azabache",
-      category: "Elegante",
-      price: 170000,
-      description: "Elegancia atemporal. Tejida en cordón fino de seda blanca con acabados y broches metálicos premium.",
-      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
-    },
-     {
-      id: 6,
-      name: "Mochila Seda Beige Azabache",
-      category: "Elegante",
-      price: 160000,
-      description: "Elegancia atemporal. Tejida en cordón fino de seda Beige con acabados y broches metálicos premium.",
-      image: "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  let currentCategory = "todas";
-  const grid = document.getElementById("productGrid");
-  const searchInput = document.getElementById("searchInput");
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  function formatPrice(amount) {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
-  }
-
-  function render() {
-    const query = searchInput.value.toLowerCase();
-    grid.innerHTML = "";
-
-    const filtered = products.filter(p => {
-      const matchesCategory = currentCategory === "todas" || p.category === currentCategory;
-      const matchesSearch = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
-      return matchesCategory && matchesSearch;
-    });
-
-    if (filtered.length === 0) {
-      grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 0;">No se encontraron mochilas que coincidan con tu búsqueda.</p>`;
-      return;
+    function formatPrice(amount) {
+      return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
     }
 
-    filtered.forEach(p => {
+    function render() {
+      const query = searchInput.value.toLowerCase();
+      grid.innerHTML = "";
+
+      const filtered = products.filter(p => {
+        const matchesCategory = currentCategory === "todas" || p.category === currentCategory;
+        const matchesSearch = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: var(--gray-mid);">NO SE ENCONTRARON PRODUCTOS.</p>`;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
+        const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="img-wrap" onclick="openModal(${p.id})">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+            <div class="badge-price">${formatPrice(p.price)}</div>
+          </div>
+          <div class="card-info">
+            <span class="tag-text">${p.tag || p.category}</span>
+            <div class="product-name">${p.name}</div>
+            <p class="product-desc">${p.description}</p>
+            <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCat(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll(".nav-categories button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      render();
+    }
+
+    function openModal(id) {
+      const p = products.find(prod => prod.id === id);
+      if(!p) return;
+
+      document.getElementById("mImg").src = p.image;
+      document.getElementById("mTitle").textContent = p.name;
+      document.getElementById("mDesc").textContent = p.description;
+      document.getElementById("mTag").textContent = p.tag || p.category;
+      document.getElementById("mPrice").textContent = formatPrice(p.price);
+
       const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
-      const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+      document.getElementById("mWsBtn").href = `https://wa.me/${phoneWhatsApp}?text=${message}`;
 
-      const card = document.createElement("article");
-      card.className = "card";
-      card.innerHTML = `
-        <div class="imgWrap">
-          ${p.tag ? `<div class="tag">${p.tag}</div>` : ""}
-          <img src="${p.image}" alt="${p.name}" loading="lazy" />
-        </div>
-        <div class="name">${p.name}</div>
-        <p class="description">${p.description}</p>
-        <div class="price">${formatPrice(p.price)}</div>
-        <div class="actions">
-          <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp 📲</a>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
+      document.getElementById("productModal").classList.add("active");
+    }
 
-  function filterCategory(cat, btn) {
-    currentCategory = cat;
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+    function closeModal() {
+      document.getElementById("productModal").classList.remove("active");
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById("productModal");
+      if (e.target === modal) closeModal();
+    }
+
+    searchInput.addEventListener("input", render);
     render();
-  }
-
-  searchInput.addEventListener("input", render);
-  render();
-</script>
-
+  </script>
 </body>
 </html>
