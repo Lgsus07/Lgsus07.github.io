@@ -33,7 +33,7 @@
       color: inherit;
     }
 
-    /* 📌 Barra de Anuncios Superior (Ticker) */
+    /* 📌 Barra de Anuncios Superior */
     .top-bar {
       background: var(--black);
       color: var(--white);
@@ -95,8 +95,10 @@
       border-bottom-color: var(--black);
     }
 
-    .search-box {
-      position: relative;
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .search-box input {
@@ -104,8 +106,41 @@
       border: none;
       padding: 8px 14px;
       font-size: 13px;
-      width: 200px;
+      width: 180px;
       outline: none;
+    }
+
+    /* 🛒 Botón del Carrito en el Header */
+    .cart-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 6px;
+    }
+
+    .cart-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--black);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* 📌 Hero Banner Principal */
@@ -255,38 +290,178 @@
       margin-bottom: 8px;
     }
 
-    .btn-ws {
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn-add-cart {
       background: var(--black);
       color: var(--white);
       border: none;
-      width: 100%;
+      flex: 1;
       padding: 12px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
-      margin-top: auto;
-      text-align: center;
     }
 
-    .btn-ws:hover {
+    .btn-add-cart:hover {
       background: #333;
     }
 
-    /* 📌 Banner Promocional */
-    .promo-strip {
-      background: var(--gray-light);
-      padding: 40px 20px;
-      margin: 60px 0;
-      text-align: center;
+    /* 🛒 Drawer / Panel Lateral del Carrito */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
     }
 
-    .promo-strip h2 {
-      font-size: 24px;
+    .cart-overlay.active {
+      display: block;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      background: var(--white);
+      z-index: 201;
+      box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer.active {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--gray-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      font-size: 16px;
       font-weight: 900;
       text-transform: uppercase;
-      margin-bottom: 8px;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      background: var(--gray-light);
+    }
+
+    .cart-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cart-item-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .cart-item-price {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .qty-btn {
+      background: var(--gray-light);
+      border: none;
+      width: 24px;
+      height: 24px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .remove-item {
+      background: none;
+      border: none;
+      color: #d9534f;
+      font-size: 11px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid var(--gray-light);
+      background: var(--white);
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: var(--accent-green);
+      color: var(--white);
+      border: none;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     /* 📌 Modal de Producto */
@@ -372,7 +547,37 @@
       display: block;
     }
 
-    .footer-col a:hover { color: var(--white); }
+    /* 🌐 Logos de Redes Sociales */
+    .social-icons-bar {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .social-icon-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .social-icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--white);
+    }
+
+    .social-icon-btn:hover {
+      background: var(--white);
+      border-color: var(--white);
+    }
+
+    .social-icon-btn:hover svg {
+      fill: var(--black);
+    }
 
     .copy {
       text-align: center;
@@ -405,11 +610,45 @@
         </ul>
       </nav>
 
-      <div class="search-box">
-        <input id="searchInput" type="text" placeholder="BUSCAR..." />
+      <div class="header-actions">
+        <div class="search-box">
+          <input id="searchInput" type="text" placeholder="BUSCAR..." />
+        </div>
+        
+        <!-- Botón Carrito de Compras -->
+        <button class="cart-btn" onclick="toggleCart()">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+          </svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- 🛒 Panel Lateral / Carrito de Compras -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Tu Carrito</h3>
+      <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+      <!-- Elementos agregados dinámicamente -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <span id="cartTotalAmount">$0</span>
+      </div>
+      <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+        <span>Completar Pedido por WhatsApp</span>
+        <svg style="width:18px;height:18px;fill:#fff" viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
 
   <!-- 📌 Hero Banner -->
   <section class="hero-banner">
@@ -426,13 +665,6 @@
     <div class="grid" id="productGrid"></div>
   </main>
 
-  <!-- 📌 Banner Promocional -->
-  <section class="promo-strip">
-    <h2>¿Buscas un diseño personalizado?</h2>
-    <p style="margin-bottom: 16px; color: var(--gray-mid);">Tejemos piezas exclusivas bajo pedido con la combinación de colores que elijas.</p>
-    <a href="https://wa.me/573007241847" target="_blank" class="btn-adidas btn-dark">CONTACTAR POR WHATSAPP</a>
-  </section>
-
   <!-- 📌 Modal de Producto -->
   <div class="modal" id="productModal">
     <div class="modal-content">
@@ -443,7 +675,7 @@
         <h2 id="mTitle" style="text-transform: uppercase; margin: 8px 0;"></h2>
         <p id="mDesc" style="color: var(--gray-mid); font-size: 13px; margin-bottom: 16px;"></p>
         <div id="mPrice" style="font-size: 20px; font-weight: 900; margin-bottom: 24px;"></div>
-        <a id="mWsBtn" class="btn-ws" href="" target="_blank">Pedir vía WhatsApp</a>
+        <button id="mAddBtn" class="btn-adidas btn-dark" style="width:100%; justify-content:center;">Añadir al Carrito</button>
       </div>
     </div>
   </div>
@@ -461,9 +693,28 @@
         <p>📍 Envíos directos desde Colombia</p>
       </div>
       <div class="footer-col">
-        <h4>SÍGUENOS</h4>
-        <a href="https://www.instagram.com/ld_handmade?igsh=MWdvcnI2Nms1NG02Zg%3D%3D" target="_blank">Instagram: @ld_handmade</a>
-        <a href="https://www.facebook.com/people/Laura-Durango-Handmade/61563706183223/?sk=about" target="_blank">Facebook: Laura Durango Handmade</a>
+        <h4>SÍGUENOS EN REDES</h4>
+        <p style="margin-bottom:8px;">Conéctate con nuestra comunidad:</p>
+        <div class="social-icons-bar">
+          <!-- Logo Instagram -->
+          <a href="https://www.instagram.com/ld_handmade?igsh=MWdvcnI2Nms1NG02Zg%3D%3D" target="_blank" class="social-icon-btn" title="Instagram">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <!-- Logo Facebook -->
+          <a href="https://www.facebook.com/people/Laura-Durango-Handmade/61563706183223/?sk=about" target="_blank" class="social-icon-btn" title="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/>
+            </svg>
+          </a>
+          <!-- Logo WhatsApp -->
+          <a href="https://wa.me/573007241847" target="_blank" class="social-icon-btn" title="WhatsApp">
+            <svg viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
     <div class="copy">
@@ -474,7 +725,6 @@
   <script>
     const phoneWhatsApp = "+573007241847";
 
-    // Mismos datos originales preservados
     const products = [
       { id: 1, name: "Mochila Seda Dorada Champagne", category: "Elegante", price: 160000, tag: "Edición Limitada", description: "Tejido tupido en cordón de seda satinado color champagne. Incluye forro interno e hilos metalizados.", image: "A1.jfif" },
       { id: 2, name: "Mini Mochila Seda Rosa Pastel", category: "Mini", price: 130000, tag: "Más Pedida", description: "Tamaño compacto tejido a mano. Ligera, suave al tacto y perfecta para salidas casuales o de noche.", image: "A3.jfif" },
@@ -485,7 +735,9 @@
       { id: 7, name: "Mochila Seda contract", category: "Mochilas grandes", price: 180000, tag: "Grande", description: "Elegancia atemporal. Tejida en cordón fino de seda acabados y broches metálicos premium.", image: "A2.webp" }
     ];
 
+    let cart = [];
     let currentCategory = "todas";
+
     const grid = document.getElementById("productGrid");
     const searchInput = document.getElementById("searchInput");
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -494,6 +746,89 @@
       return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
     }
 
+    /* 🛒 LÓGICA DEL CARRITO */
+    function toggleCart() {
+      document.getElementById("cartOverlay").classList.toggle("active");
+      document.getElementById("cartDrawer").classList.toggle("active");
+    }
+
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      if(!prod) return;
+
+      const existingIndex = cart.findIndex(item => item.id === productId);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({ ...prod, qty: 1 });
+      }
+
+      updateCartUI();
+      toggleCart();
+    }
+
+    function updateQty(productId, change) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index > -1) {
+        cart[index].qty += change;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById("cartItemsContainer");
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+      document.getElementById("cartCount").textContent = totalCount;
+      document.getElementById("cartTotalAmount").textContent = formatPrice(totalPrice);
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--gray-mid); margin-top:40px; font-size:13px;">TU CARRITO ESTÁ VACÍO.</p>`;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-details">
+            <span class="cart-item-title">${item.name}</span>
+            <span class="cart-item-price">${formatPrice(item.price * item.qty)}</span>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+              <span style="font-size:12px; font-weight:700;">${item.qty}</span>
+              <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-item" onclick="removeFromCart(${item.id})">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function sendOrderToWhatsApp() {
+      if (cart.length === 0) return alert("Tu carrito está vacío.");
+
+      let text = "Hola! Quisiera realizar el siguiente pedido:\n\n";
+      cart.forEach(item => {
+        text += `• *${item.name}* x${item.qty} - ${formatPrice(item.price * item.qty)}\n`;
+      });
+
+      const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      text += `\n*Total a pagar:* ${formatPrice(total)}`;
+
+      const url = `https://wa.me/${phoneWhatsApp}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+    }
+
+    /* 📌 RENDERIZADO DE PRODUCTOS */
     function render() {
       const query = searchInput.value.toLowerCase();
       grid.innerHTML = "";
@@ -510,9 +845,6 @@
       }
 
       filtered.forEach(p => {
-        const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
-        const wsUrl = `https://wa.me/${phoneWhatsApp}?text=${message}`;
-
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
@@ -524,7 +856,9 @@
             <span class="tag-text">${p.tag || p.category}</span>
             <div class="product-name">${p.name}</div>
             <p class="product-desc">${p.description}</p>
-            <a class="btn-ws" href="${wsUrl}" target="_blank">Pedir por WhatsApp</a>
+            <div class="card-actions">
+              <button class="btn-add-cart" onclick="addToCart(${p.id})">Añadir al Carrito</button>
+            </div>
           </div>
         `;
         grid.appendChild(card);
@@ -548,8 +882,11 @@
       document.getElementById("mTag").textContent = p.tag || p.category;
       document.getElementById("mPrice").textContent = formatPrice(p.price);
 
-      const message = encodeURIComponent(`Hola, me interesa encargar la *${p.name}* en cordón de seda (Precio: ${formatPrice(p.price)}). ¿Me das información?`);
-      document.getElementById("mWsBtn").href = `https://wa.me/${phoneWhatsApp}?text=${message}`;
+      const addBtn = document.getElementById("mAddBtn");
+      addBtn.onclick = () => {
+        addToCart(p.id);
+        closeModal();
+      };
 
       document.getElementById("productModal").classList.add("active");
     }
@@ -565,6 +902,7 @@
 
     searchInput.addEventListener("input", render);
     render();
+    updateCartUI();
   </script>
 </body>
 </html>
